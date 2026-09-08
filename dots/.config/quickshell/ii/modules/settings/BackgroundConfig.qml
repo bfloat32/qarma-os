@@ -183,6 +183,37 @@ ContentPage {
     }
 
     ContentSection {
+        icon: "blur_on"
+        title: Translation.tr("Widget appearance")
+
+        ConfigSwitch {
+            buttonIcon: "blur_on"
+            text: Translation.tr("Frosted widget backgrounds")
+            checked: Config.options.background.widgets.blur.enable
+            onCheckedChanged: {
+                Config.options.background.widgets.blur.enable = checked;
+            }
+            StyledToolTip {
+                text: Translation.tr("Blur the wallpaper behind each widget card. Every widget that is on pays for its own, so older graphics may prefer this off.")
+            }
+        }
+
+        ConfigSlider {
+            visible: Config.options.background.widgets.blur.enable
+            text: Translation.tr("Blur amount")
+            value: Config.options.background.widgets.blur.radius
+            usePercentTooltip: false
+            buttonIcon: "deblur"
+            from: 4
+            to: 48
+            stopIndicatorValues: [24]
+            onMoved: {
+                Config.options.background.widgets.blur.radius = value;
+            }
+        }
+    }
+
+    ContentSection {
         id: settingsClock
         icon: "clock_loader_40"
         title: Translation.tr("Widget: Clock")
